@@ -42,13 +42,6 @@
 	<div class="popup" id="popup-register">
 		<h2>Registration form</h2>
 		<hr class="separator">
-		{% if register_error != null %}
-			<div class="error">
-				{% for error in register_error %}
-					- {{ error }} <br>
-				{% endfor %}
-			</div>
-		{% endif %}
 		<form method="post" action="#" id="register_form" class="form clearfix">
 			<fieldset>
 				<label for="login-username">Username:</label>
