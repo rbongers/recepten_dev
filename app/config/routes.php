@@ -38,6 +38,8 @@
 |
 */
 
+// Ajax
+$route['ajax/(:any)'] = 'ajax/$1/$2';
 $route['default_controller'] = "start";
 $route['404_override'] = '';
 

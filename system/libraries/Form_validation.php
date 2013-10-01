@@ -174,6 +174,10 @@ class CI_Form_validation {
 		return $this;
 	}
 
+	public function get_errors(){
+		return $this->_error_array;
+	}
+
 	// --------------------------------------------------------------------
 
 	/**

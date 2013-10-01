@@ -36,9 +36,36 @@ class Auth extends CI_Model {
 		return false;
 	}
 
-	public function register()
+	public function register($fields)
 	{
-
+		$query = $this->db->get_where('users', array('email' => $fields['email']), 1, 0);
+		$query2 = $this->db->get_where('users', array('username' => $fields['username']), 1, 0);
+		if($query->num_rows() < 1)
+		{   
+			if($query2->num_rows() < 1)
+			{   
+				if(is_array($password)){ $password = $password[0]; }
+				if($password !== false && $query->row()->password == $this->encrypt->sha1($password))
+				{
+					$data = array(
+						'username' 	=> $fields['username'],
+						'password'	=> $this->encrypt->sha1($password),
+						'created_at' => get_timestamp(),
+						'updated_at' => get_timestamp(),
+						'email'		=> $fields['email']
+					);
+					$this->db->insert('users', $data);
+					$object = $this->login($fields['username'], $fields['password']);
+					return $object;	
+				}
+			}
+			else{
+				return 'username_exists';
+			}
+		}else{
+			return 'email_exists';
+		}
+		return false;
 	}
 
 	public function lostpassword()
