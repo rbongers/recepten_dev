@@ -8,6 +8,7 @@ class authentication extends MY_Controller {
 		if (!$this->input->is_ajax_request()) {
 		   exit('No direct script access allowed');
 		}
+		$this->load->database();
 
 	}
 
@@ -25,12 +26,12 @@ class authentication extends MY_Controller {
 			array(
 				'field' => 'r_username',
 				'label' => 'gebruikersnaam',
-				'rules' => 'trim|required|min_length[5]|max_length[12]|xss_clean'
+				'rules' => 'trim|required|min_length[4]|max_length[12]|xss_clean'
 			),
 			array(
 				'field' => 'r_password',
 				'label' => 'wachtwoord',
-				'rules' => 'trim|required|matches[passconf]|sha1'
+				'rules' => 'trim|required|matches[r_passwordconfirm]|sha1'
 			),
 			array(
 				'field' => 'r_passwordconfirm',
@@ -41,6 +42,11 @@ class authentication extends MY_Controller {
 				'field' => 'r_email',
 				'label' => 'E-mailadres',
 				'rules' => 'trim|required|valid_email'
+			),
+			array(
+				'field' => 'r_terms',
+				'label' => 'Terms',
+				'rules' => 'required'
 			)
 	   	);
 		$this->form_validation->set_rules($config);
@@ -52,11 +58,15 @@ class authentication extends MY_Controller {
 				'password'	=> $this->input->post('r_password'),
 				'email'		=> $this->input->post('r_email')
 			);
-			if($auth->register($fields))
+			if($object = $this->auth->register($fields))
 			{
-				echo 'success';
+				$this->output
+			    ->set_content_type('application/json')
+			    ->set_output(json_encode(array('status' => 'success', 'data' => $object)));
 			}else{
-				echo 'error';
+				$this->output
+			    ->set_content_type('application/json')
+			    ->set_output(json_encode(array('status' => 'error', 'data' => $object)));
 			}
 		}
 		else

@@ -43,12 +43,11 @@
 		<h2>Registration form</h2>
 		<hr class="separator">
 		<form method="post" action="#" id="register_form" class="form clearfix">
-			<input type="hidden" name="{{ token_name }}" value="{{ token }}">
 			<fieldset>
 				<label for="login-username">Username:</label>
 				<input type="text" name="r_username" id="login-username" class="input text">
 				<label for="login-email">Email:</label>
-				<input type="text" name="r_email" id="login-email" class="input text error" value="Error">
+				<input type="text" name="r_email" id="login-email" class="input text" value="">
 				<label for="login-password">Password:</label>
 				<input type="password" name="r_password" id="login-password" class="input text">
 				<label for="login-confirm-password">Confirm password:</label>
@@ -59,7 +58,7 @@
 			
 			<div class="checks">
 				<div class="check-row">
-					<label><input type="checkbox" class="input checkbox">I have read and agree to the <a href="#">Terms &amp; Conditions</a></label>
+					<label><input type="checkbox" name="r_terms" class="input checkbox">I have read and agree to the <a href="#">Terms &amp; Conditions</a></label>
 				</div>
 				<div class="check-row">
 					<label><input type="checkbox" class="input checkbox">I agree to recieve promotional mails</label>

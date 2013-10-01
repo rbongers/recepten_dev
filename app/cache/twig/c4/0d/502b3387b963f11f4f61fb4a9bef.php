@@ -32,35 +32,54 @@ class __TwigTemplate_c40d502b3387b963f11f4f61fb4a9bef extends Twig_Template
 \t<div class=\"top-nav\">
 \t\t<nav>
 \t\t\t<ul>
-\t\t\t\t<li><a href=\"#\" id=\"login-btn\">login</a></li>
-\t\t\t\t<li><a href=\"#\" class=\"register-btn\">register</a></li>
-\t\t\t\t<li><a href=\"about.html\">about</a></li>
-\t\t\t\t<li><a href=\"contact.html\">contact</a></li>
-\t\t\t\t<li><a href=\"menu.html\">menu</a></li>
-\t\t\t\t<li>
-\t\t\t\t\t<a href=\"menu.html\">Sub menu</a>
-\t\t\t\t\t<ul>
-\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t<a href=\"menu.html\">level 2</a>
-\t\t\t\t\t\t\t<ul>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t</ul>
-\t\t\t\t\t\t</li>
-\t\t\t\t\t\t<li>
-\t\t\t\t\t\t\t<a href=\"menu.html\">level 2</a>
-\t\t\t\t\t\t\t<ul>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
-\t\t\t\t\t\t\t</ul>
-\t\t\t\t\t\t</li>
-\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
-\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
-\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
-\t\t\t\t\t</ul>
-\t\t\t\t</li>
+\t\t\t\t";
+        // line 9
+        if (isset($context["authUser"])) { $_authUser_ = $context["authUser"]; } else { $_authUser_ = null; }
+        if ($this->getAttribute($_authUser_, "logged")) {
+            // line 10
+            echo "\t\t\t\t\t<li><span>Welcome back ";
+            if (isset($context["authUser"])) { $_authUser_ = $context["authUser"]; } else { $_authUser_ = null; }
+            echo twig_escape_filter($this->env, $this->getAttribute($_authUser_, "username"), "html", null, true);
+            echo "</span></li>
+\t\t\t\t\t<li><a href=\"#\">Profiel</a></li>
+\t\t\t\t\t<li><a href=\"#\">Logout</a></li>
+\t\t\t\t";
+        } else {
+            // line 14
+            echo "\t\t\t\t\t<li><a href=\"#\" id=\"login-btn\">login</a></li>
+\t\t\t\t\t<li><a href=\"#\" class=\"register-btn\">register</a></li>
+\t\t\t\t\t<li><a href=\"about.html\">about</a></li>
+\t\t\t\t\t<li><a href=\"contact.html\">contact</a></li>
+\t\t\t\t\t<li><a href=\"menu.html\">menu</a></li>
+\t\t\t\t\t<li>
+\t\t\t\t\t\t<a href=\"menu.html\">Sub menu</a>
+\t\t\t\t\t\t<ul>
+\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t<a href=\"menu.html\">level 2</a>
+\t\t\t\t\t\t\t\t<ul>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t<a href=\"menu.html\">level 2</a>
+\t\t\t\t\t\t\t\t<ul>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 3</a></li>
+\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
+\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
+\t\t\t\t\t\t\t<li><a href=\"menu.html\">level 2</a></li>
+\t\t\t\t\t\t</ul>
+\t\t\t\t\t</li>
+\t\t\t\t";
+        }
+        // line 44
+        echo "\t\t\t\t
+\t\t\t\t
 \t\t  \t</ul>
 \t\t</nav>
 \t\t<form class=\"search-form\" method=\"post\">
@@ -232,6 +251,6 @@ class __TwigTemplate_c40d502b3387b963f11f4f61fb4a9bef extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  31 => 5,  28 => 4,);
+        return array (  81 => 44,  49 => 14,  40 => 10,  37 => 9,  31 => 5,  28 => 4,);
     }
 }

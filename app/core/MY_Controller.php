@@ -15,13 +15,15 @@ class MY_Controller extends CI_Controller
 		$this->data['token_name'] = $this->security->get_csrf_token_name();
 		$this->data['token'] = $this->security->get_csrf_hash();
 		$this->data['resource_url'] = $this->config->base_url().'/public/';
-		$this->listener();
+		$this->init();
 	}
 
-	private function listener()
+	private function init()
 	{
-		
-		
+		// Check if user is logged
+		$this->authUser = $this->auth->check_login();
+		// Fill user object in view 
+		$this->data['authUser'] = $this->authUser;
 
 		// Lost password listener
 		if($this->input->post('l_email') && $this->input->post('l_password')){

@@ -10,15 +10,44 @@ class Auth extends CI_Model {
 		// Call the Model constructor
 		parent::__construct();
 		$this->load->library('encrypt');
-		$this->load->helper('cookie');
+		// $this->load->helper('cookie');
 	}
-	
+
+	public function check_login() 
+	{
+		if($this->session->userdata('auth'))
+		{
+			$auth = $this->session->userdata('auth');
+			if(@ $auth->logged)
+			{
+				return $this->session->userdata('auth');
+			}
+		}
+		/*elseif(@ $this->input->cookie('dj_Auth') != null)
+		{
+			$user = $this->input->cookie('dj_Auth');
+			$user = explode('*', $user);
+			$user_id = $user[0];
+			$secret = $user[1];
+			$query = $this->db->get_where('users', array('keysecret' => $secret, 'id' => $user_id));
+			if($query->num_rows() > 0)
+			{
+				$result = $query->result(); $result = $result[0];
+				$this->remember($result);
+			}
+		}*/
+		return false;
+	}
+
+
 	public function login($email, $password, $remember=false)
 	{
-		$query = $this->db->get_where('users', array('email' => $email), 1, 0);
+		$this->db->select('*');
+		$this->db->where('email', $email);
+		$this->db->or_where('username', $email); 
+		$query = $this->db->get('users');
 		if($query->num_rows() > 0)
-		{   
-			if(is_array($password)){ $password = $password[0]; }
+		{
 			if($password !== false && $query->row()->password == $this->encrypt->sha1($password))
 			{
 				$this->array = $query->row();
@@ -44,20 +73,17 @@ class Auth extends CI_Model {
 		{   
 			if($query2->num_rows() < 1)
 			{   
-				if(is_array($password)){ $password = $password[0]; }
-				if($password !== false && $query->row()->password == $this->encrypt->sha1($password))
-				{
-					$data = array(
-						'username' 	=> $fields['username'],
-						'password'	=> $this->encrypt->sha1($password),
-						'created_at' => get_timestamp(),
-						'updated_at' => get_timestamp(),
-						'email'		=> $fields['email']
-					);
-					$this->db->insert('users', $data);
-					$object = $this->login($fields['username'], $fields['password']);
-					return $object;	
-				}
+				$data = array(
+					'username' 	=> $fields['username'],
+					'password'	=> $this->encrypt->sha1($fields['password']),
+					'created_at' => get_timestamp(),
+					'updated_at' => time(),
+					'email'		=> $fields['email']
+				);
+				$this->db->insert('users', $data);
+				$object = $this->login($fields['username'], $fields['password']);
+				return $object;	
+				
 			}
 			else{
 				return 'username_exists';

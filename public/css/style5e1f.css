@@ -125,7 +125,7 @@ header {
   padding-left: 0;
   background: none;
 }
-.top-nav nav > ul  li a {
+.top-nav nav > ul  li a, .top-nav nav > ul li span {
   line-height: 14px;
   text-transform: uppercase;
   color: #FFF;
@@ -133,6 +133,8 @@ header {
   font-weight: bold;
   text-decoration: none;
 }
+
+
 .top-nav nav > ul li a:hover {
 	color: #e95b45;
 }
@@ -1049,7 +1051,7 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
   padding: 10px 0 0;
 }
 .form .text, .form textarea {clear: right; width: 280px; background: #d5c6b1; padding: 10px; margin-bottom: 10px; background: #d8c7aa; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px}
-.form .error {-moz-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); -webkit-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); color: #be1904; text-align: center}
+.form .error {-moz-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); -webkit-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); color: #be1904;}
 .form textarea {height: 100px}
 .form .checkbox {width: 15px; padding: 0; background: none; -moz-border-radius: 2px}
 .form .required {color: #b31a05}
@@ -1619,3 +1621,17 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 #popup-register .checks {width: 305px; float: right; color: #5b3922; font-size: 13px; margin-bottom: 10px;}
 #popup-register .check-row {overflow: hidden; padding: 0 0 10px}
 #popup-register .checkbox {margin-right: 4px}
+
+.message { padding: 10px; margin-bottom:10px; background:#ff867f; color:#fff !important; text-shadow:1px 1px 1px #c52a3e; font-size:13px;}
+
+
+
+
+
+
+
+
+
+
+
+

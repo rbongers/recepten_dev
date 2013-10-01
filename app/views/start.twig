@@ -6,35 +6,43 @@
 	<div class="top-nav">
 		<nav>
 			<ul>
-				<li><a href="#" id="login-btn">login</a></li>
-				<li><a href="#" class="register-btn">register</a></li>
-				<li><a href="about.html">about</a></li>
-				<li><a href="contact.html">contact</a></li>
-				<li><a href="menu.html">menu</a></li>
-				<li>
-					<a href="menu.html">Sub menu</a>
-					<ul>
-						<li>
-							<a href="menu.html">level 2</a>
-							<ul>
-								<li><a href="menu.html">level 3</a></li>
-								<li><a href="menu.html">level 3</a></li>
-								<li><a href="menu.html">level 3</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="menu.html">level 2</a>
-							<ul>
-								<li><a href="menu.html">level 3</a></li>
-								<li><a href="menu.html">level 3</a></li>
-								<li><a href="menu.html">level 3</a></li>
-							</ul>
-						</li>
-						<li><a href="menu.html">level 2</a></li>
-						<li><a href="menu.html">level 2</a></li>
-						<li><a href="menu.html">level 2</a></li>
-					</ul>
-				</li>
+				{% if authUser.logged %}
+					<li><span>Welcome back {{ authUser.username }}</span></li>
+					<li><a href="#">Profiel</a></li>
+					<li><a href="{{ base_url }}logout" class="logout-btn">Logout</a></li>
+				{% else %}
+					<li><a href="#" id="login-btn">login</a></li>
+					<li><a href="#" class="register-btn">register</a></li>
+					<li><a href="about.html">about</a></li>
+					<li><a href="contact.html">contact</a></li>
+					<li><a href="menu.html">menu</a></li>
+					<li>
+						<a href="menu.html">Sub menu</a>
+						<ul>
+							<li>
+								<a href="menu.html">level 2</a>
+								<ul>
+									<li><a href="menu.html">level 3</a></li>
+									<li><a href="menu.html">level 3</a></li>
+									<li><a href="menu.html">level 3</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="menu.html">level 2</a>
+								<ul>
+									<li><a href="menu.html">level 3</a></li>
+									<li><a href="menu.html">level 3</a></li>
+									<li><a href="menu.html">level 3</a></li>
+								</ul>
+							</li>
+							<li><a href="menu.html">level 2</a></li>
+							<li><a href="menu.html">level 2</a></li>
+							<li><a href="menu.html">level 2</a></li>
+						</ul>
+					</li>
+				{% endif %}
+				
+				
 		  	</ul>
 		</nav>
 		<form class="search-form" method="post">
