@@ -43,6 +43,7 @@
 		<h2>Registration form</h2>
 		<hr class="separator">
 		<form method="post" action="#" id="register_form" class="form clearfix">
+			<input type="hidden" name="{{ token_name }}" value="{{ token }}">
 			<fieldset>
 				<label for="login-username">Username:</label>
 				<input type="text" name="r_username" id="login-username" class="input text">

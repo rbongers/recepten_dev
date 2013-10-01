@@ -8,6 +8,7 @@ class authentication extends MY_Controller {
 		if (!$this->input->is_ajax_request()) {
 		   exit('No direct script access allowed');
 		}
+
 	}
 
 
@@ -45,6 +46,7 @@ class authentication extends MY_Controller {
 		$this->form_validation->set_rules($config);
 		if ($this->form_validation->run() == TRUE)
 		{
+			
 			$fields = array(
 				'username'	=> $this->input->post('r_username'),
 				'password'	=> $this->input->post('r_password'),

@@ -73,34 +73,15 @@ class __TwigTemplate_d1a8979fd0fae943c4f9c9d276a9ddfa extends Twig_Template
 \t<div class=\"popup\" id=\"popup-register\">
 \t\t<h2>Registration form</h2>
 \t\t<hr class=\"separator\">
-\t\t";
-        // line 45
-        if (isset($context["register_error"])) { $_register_error_ = $context["register_error"]; } else { $_register_error_ = null; }
-        if (($_register_error_ != null)) {
-            // line 46
-            echo "\t\t\t<div class=\"error\">
-\t\t\t\t";
-            // line 47
-            if (isset($context["register_error"])) { $_register_error_ = $context["register_error"]; } else { $_register_error_ = null; }
-            $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($_register_error_);
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 48
-                echo "\t\t\t\t\t- ";
-                if (isset($context["error"])) { $_error_ = $context["error"]; } else { $_error_ = null; }
-                echo twig_escape_filter($this->env, $_error_, "html", null, true);
-                echo " <br>
-\t\t\t\t";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 50
-            echo "\t\t\t</div>
-\t\t";
-        }
-        // line 52
-        echo "\t\t<form method=\"post\" action=\"#\" id=\"register_form\" class=\"form clearfix\">
+\t\t<form method=\"post\" action=\"#\" id=\"register_form\" class=\"form clearfix\">
+\t\t\t<input type=\"hidden\" name=\"";
+        // line 46
+        if (isset($context["token_name"])) { $_token_name_ = $context["token_name"]; } else { $_token_name_ = null; }
+        echo twig_escape_filter($this->env, $_token_name_, "html", null, true);
+        echo "\" value=\"";
+        if (isset($context["token"])) { $_token_ = $context["token"]; } else { $_token_ = null; }
+        echo twig_escape_filter($this->env, $_token_, "html", null, true);
+        echo "\">
 \t\t\t<fieldset>
 \t\t\t\t<label for=\"login-username\">Username:</label>
 \t\t\t\t<input type=\"text\" name=\"r_username\" id=\"login-username\" class=\"input text\">
@@ -129,35 +110,35 @@ class __TwigTemplate_d1a8979fd0fae943c4f9c9d276a9ddfa extends Twig_Template
 \t</div>
 \t<div class='wrapper'>
 \t    ";
-        // line 80
+        // line 74
         $this->displayBlock('content', $context, $blocks);
-        // line 82
+        // line 76
         echo "\t</div>
 </body>
 
 
 <script type=\"text/javascript\" src=\"";
-        // line 86
+        // line 80
         if (isset($context["resource_url"])) { $_resource_url_ = $context["resource_url"]; } else { $_resource_url_ = null; }
         echo twig_escape_filter($this->env, $_resource_url_, "html", null, true);
         echo "js/libs/jquery-1.7.1.min.js\"></script>
 <script src=\"";
-        // line 87
+        // line 81
         if (isset($context["resource_url"])) { $_resource_url_ = $context["resource_url"]; } else { $_resource_url_ = null; }
         echo twig_escape_filter($this->env, $_resource_url_, "html", null, true);
         echo "js/libs/jquery.easing.1.3.js\"></script>
 <script src=\"";
-        // line 88
+        // line 82
         if (isset($context["resource_url"])) { $_resource_url_ = $context["resource_url"]; } else { $_resource_url_ = null; }
         echo twig_escape_filter($this->env, $_resource_url_, "html", null, true);
         echo "js/script.js\"></script>
 <script src=\"";
-        // line 89
+        // line 83
         if (isset($context["resource_url"])) { $_resource_url_ = $context["resource_url"]; } else { $_resource_url_ = null; }
         echo twig_escape_filter($this->env, $_resource_url_, "html", null, true);
         echo "js/recepten.js\"></script>
 <script src=\"";
-        // line 90
+        // line 84
         if (isset($context["resource_url"])) { $_resource_url_ = $context["resource_url"]; } else { $_resource_url_ = null; }
         echo twig_escape_filter($this->env, $_resource_url_, "html", null, true);
         echo "js/libs/jquery.jcarousel.min.js\"></script>
@@ -172,33 +153,33 @@ class __TwigTemplate_d1a8979fd0fae943c4f9c9d276a9ddfa extends Twig_Template
 \t\t\t\tinitCallback: mycarousel_initCallback,
 \t\t});
 \t\tRecepten.token = '";
-        // line 101
+        // line 95
         if (isset($context["token"])) { $_token_ = $context["token"]; } else { $_token_ = null; }
         echo twig_escape_filter($this->env, $_token_, "html", null, true);
         echo "';
 \t\tRecepten.base_url = '";
-        // line 102
+        // line 96
         if (isset($context["base_url"])) { $_base_url_ = $context["base_url"]; } else { $_base_url_ = null; }
         echo twig_escape_filter($this->env, $_base_url_, "html", null, true);
         echo "';
 \t\t";
-        // line 103
+        // line 97
         if (isset($context["register_error"])) { $_register_error_ = $context["register_error"]; } else { $_register_error_ = null; }
         if (($_register_error_ != null)) {
-            // line 104
+            // line 98
             echo "\t\t\t\$(\".register-btn\").trigger('click');
 \t\t";
         }
-        // line 106
+        // line 100
         echo "\t});
 </script>
 </html>";
     }
 
-    // line 80
+    // line 74
     public function block_content($context, array $blocks = array())
     {
-        // line 81
+        // line 75
         echo "\t    ";
     }
 
@@ -214,6 +195,6 @@ class __TwigTemplate_d1a8979fd0fae943c4f9c9d276a9ddfa extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  202 => 81,  199 => 80,  193 => 106,  189 => 104,  186 => 103,  181 => 102,  176 => 101,  161 => 90,  156 => 89,  151 => 88,  146 => 87,  141 => 86,  135 => 82,  133 => 80,  103 => 52,  99 => 50,  89 => 48,  84 => 47,  81 => 46,  78 => 45,  47 => 18,  40 => 15,  35 => 14,  20 => 1,);
+        return array (  183 => 75,  180 => 74,  174 => 100,  170 => 98,  167 => 97,  162 => 96,  157 => 95,  142 => 84,  137 => 83,  132 => 82,  127 => 81,  122 => 80,  116 => 76,  114 => 74,  79 => 46,  47 => 18,  40 => 15,  35 => 14,  20 => 1,);
     }
 }

@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller
 		// Parent contruct
 		parent::__construct();
 		$this->data = array();
+		$this->data['token_name'] = $this->security->get_csrf_token_name();
 		$this->data['token'] = $this->security->get_csrf_hash();
 		$this->data['resource_url'] = $this->config->base_url().'/public/';
 		$this->listener();
