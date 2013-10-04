@@ -45,6 +45,13 @@ h1, h2, h3, h4, h5, h6 {
 .mar-l-10 {
 	margin-left: 10px;
 }
+
+.pull-left { 
+  float:left !important;
+}
+.pull-right {
+  float:right !important;
+}
 ol li {
     list-style-type: decimal;
 }
@@ -1024,7 +1031,7 @@ ul li {background: url(../images/breadcrumbs-arrow.png) no-repeat left 5px; list
 ol li {list-style-position: inside}
 
 .content ol li li {padding:0 0 0 20px; list-style-type: lower-alpha}
-input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 10px; border-radius: 10px; border: none; background-color: #cfb27e}
+input, textarea, select {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 10px; border-radius: 10px; border: none; background-color: #cfb27e}
 .button {
 	cursor: pointer;
   display: block;
@@ -1036,6 +1043,7 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
   font-family: Arial, sans-serif;
   border: none;
   border-radius: 5px;
+  text-align: center;
   background: #c21702;
   background: -moz-linear-gradient(top center, #d31602, #b11801);
   background: -webkit-gradient(linear, left top, left bottom, from(#c51501), to(#9b1600));
@@ -1044,13 +1052,15 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 .form label {
   float: left;
   display: block;
-  width: 110px;
+  width: 200px;
   font-size: 14px;
   font-weight: bold;
   color: #321a0a;
   padding: 10px 0 0;
 }
-.form .text, .form textarea {clear: right; width: 280px; background: #d5c6b1; padding: 10px; margin-bottom: 10px; background: #d8c7aa; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px}
+.form .text, .form textarea, .form select {clear: right; width: 280px; background: #d5c6b1; padding: 10px; margin-bottom: 10px; background: #d8c7aa; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px}
+.form select { -webkit-appearance: none; background-image:url(../../images/dropdown.png); background-position:center right; background-repeat: no-repeat;}
+.form input[type=checkbox] { width:20px !important; }
 .form .error {-moz-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); -webkit-box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); box-shadow:inset 1px 1px 10px rgba(192, 25, 4, 1); color: #be1904;}
 .form textarea {height: 100px}
 .form .checkbox {width: 15px; padding: 0; background: none; -moz-border-radius: 2px}
@@ -1608,7 +1618,7 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 .popup .links {float: right; font-size: 12px; padding: 10px; margin: 0 58px 0 0}
 .popup .button {float: right; text-transform: uppercase}
 
-#popup-login {width: 355px; height: 270px; margin-left: -208px}
+#popup-login {width: 355px; height: auto; margin-left: -208px}
 #popup-login .input {width: 235px}
 #popup-login label {width: 100px}
 #popup-login .button {width: 255px}
@@ -1625,6 +1635,135 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 .message { padding: 10px; margin-bottom:10px; background:#ff867f; color:#fff !important; text-shadow:1px 1px 1px #c52a3e; font-size:13px;}
 
 
+
+
+
+/* Multistep form */
+
+#msform {
+  width: 970px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+}
+#msform fieldset {
+  border: 0 none;
+  padding: 20px 30px;
+  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 10%;
+  
+  /*stacking fieldsets above each other*/
+  position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+/*inputs*/
+#msform input, #msform textarea, #msform select {
+  margin-bottom: 10px;
+  width: 500px;
+  box-sizing: border-box;
+}
+
+#msform div.error {
+  padding:20px;
+  width:680px;
+  margin-bottom:10px;
+}
+#msform div.error:empty { display:none;}
+#msform .button { width:200px; color:white; float:none;}
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+#progressbar li {
+  list-style-type: none;
+  color: black;
+  text-transform: uppercase;
+  font-size: 13px;
+  width: 160px;
+  float: left;
+  position: relative;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 13px;
+  color: #000;
+  background: white;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+  background: #c21702;
+background: -moz-linear-gradient(top center, #d31602, #b11801);
+background: -webkit-gradient(linear, left top, left bottom, from(#c51501), to(#9b1600));
+  color: white;
+}
+
+div.tagsinput #tags_tag { background: none; box-shadow: none;}
+div.tagsinput {
+  width:500px; 
+  height:100px; 
+  overflow-y: auto; 
+  clear: right;
+  background: #d5c6b1;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #d8c7aa;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+div.tagsinput span.tag { border: 1px solid #8e0004; -moz-border-radius:2px; -webkit-border-radius:2px; display: block; float: left; padding: 5px; text-decoration:none; background: #c21702; background: -moz-linear-gradient(top center, #d31602, #b11801);background: -webkit-gradient(linear, left top, left bottom, from(#c51501), to(#9b1600)); color: #fff; margin-right: 5px; margin-bottom:5px;font-family: helvetica;  font-size:13px;}
+div.tagsinput span.tag a { font-weight: bold; color: #fff; text-decoration:none; font-size: 11px;  } 
+div.tagsinput input { width:120px !important; margin:0px; font-family: helvetica; font-size: 13px; border:1px solid transparent; padding:5px; box-shadow:none; background: transparent; color: #000; outline:0px;  margin-right:5px; margin-bottom:5px; }
+div.tagsinput div { display:block; float: left; } 
+.tags_clear { clear: both; width: 100%; height: 0px; }
+.not_valid {background: #FBD8DB !important; color: #90111A !important;}
 
 
 

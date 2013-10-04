@@ -5,6 +5,7 @@ class Start extends MY_Controller {
 	
 	public function index()
 	{
+		$this->data['start'] = true;
 		$this->twig->display('start.twig', $this->data);
 	}
 }

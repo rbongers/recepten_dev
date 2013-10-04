@@ -21,14 +21,18 @@ class MY_Controller extends CI_Controller
 	private function init()
 	{
 		// Check if user is logged
-		$this->authUser = $this->auth->check_login();
+		if(! $this->authUser = $this->auth->check_login()){
+			$this->authUser->logged = false;
+		}
 		// Fill user object in view 
 		$this->data['authUser'] = $this->authUser;
 
-		// Lost password listener
-		if($this->input->post('l_email') && $this->input->post('l_password')){
-			$auth->lostpassword($this->input->post('l_email'), $this->input->post('l_email'), $this->input->post('l_remember'));
-		}
+		$this->data['menugang'] = $this->recipesModel->menugang();
+		$this->data['hoofdgroup'] = $this->recipesModel->hoofdgroup();
+		$this->data['technique'] = $this->recipesModel->technique();
+		$this->data['kitchen'] = $this->recipesModel->kitchen();
+		$this->data['opening'] = $this->recipesModel->opening();
+		$this->data['dieten'] = $this->recipesModel->dieten();
 	}
 
 	public function flashdata($text, $cat, $type)

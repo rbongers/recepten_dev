@@ -1,6 +1,6 @@
 <?php
 
-class Auth extends CI_Model {
+class Auth extends MY_Model {
 
 
 	private $array;
@@ -39,16 +39,31 @@ class Auth extends CI_Model {
 		return false;
 	}
 
+	public function logout()
+	{
+		$this->session->unset_userdata('auth');
+		$cookie = array(
+			'name'   => 'Auth',
+			'value'  => '',
+			'expire' => '',
+			'domain' => '',
+			'path'   => '/',
+			'prefix' => 'recepten_',
+			'secure' => FALSE
+		);
+		$this->input->set_cookie($cookie);
+		return true;
+	}
 
-	public function login($email, $password, $remember=false)
+	public function login($fields, $remember=false)
 	{
 		$this->db->select('*');
-		$this->db->where('email', $email);
-		$this->db->or_where('username', $email); 
+		$this->db->where('email', $fields['username']);
+		$this->db->or_where('username', $fields['username']); 
 		$query = $this->db->get('users');
 		if($query->num_rows() > 0)
 		{
-			if($password !== false && $query->row()->password == $this->encrypt->sha1($password))
+			if($fields['password'] !== false && $query->row()->password == $this->encrypt->sha1($fields['password']))
 			{
 				$this->array = $query->row();
 				unset($this->array->password);
@@ -60,9 +75,11 @@ class Auth extends CI_Model {
 				$this->session->set_userdata('auth', $this->array);
 
 				return $this->array;
+			} else {
+				return 'bath_password';
 			}
 		}
-		return false;
+		return 'not_found';
 	}
 
 	public function register($fields)

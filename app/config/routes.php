@@ -41,6 +41,9 @@
 // Ajax
 $route['ajax/(:any)'] = 'ajax/$1/$2';
 
+$route['recept-toevoegen'] = 'recipe/ManageRecipe/add';
+$route['recept-aanpassen/(:num)/(:any)'] = 'recipe/ManageRecipe/edit/$1';
+
 // $route['logout'] = 'logout';
 $route['default_controller'] = "start";
 $route['404_override'] = '';
