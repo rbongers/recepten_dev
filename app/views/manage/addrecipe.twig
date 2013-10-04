@@ -1,0 +1,260 @@
+{% extends 'layout/base.twig' %}
+
+
+{% block content %}
+<div class="content full-content clearfix">
+	<div class="breadcrumbs">
+		<ul>
+			<li><a href="{{ base_url }}">Start</a></li>
+			{% if authUser.logged %} <li><a href="{{ base_url }}profiel">{{ authUser.username }}</a></li> {% endif %}
+			<li>Recept toevoegen</li>
+		</ul>
+	</div>
+
+
+	<!-- multistep form -->
+	<form id="msform" class="form">
+		<!-- progressbar -->
+		<ul id="progressbar">
+			<li class="active">Profiel</li>
+			<li>Algemene informatie</li>
+			<li>Omschrijvingen</li>
+			<li>Vermeldingen</li>
+			<li>Publiceren</li>
+		</ul>
+		<!-- fieldsets -->
+		<fieldset id="step1">
+			<h2 class="fs-title">Profiel</h2>
+			<h3 class="fs-subtitle">Login om uw eigen recepten op te slaan </h3>
+			<a class="button pull-left" id="login-btn">Inloggen</a>
+			<a class="button pull-left mar-l-10" id="login-btn">Registreren</a>
+			<input type="button" name="next" class="next button pull-left mar-l-10" value="Overslaan" />
+		</fieldset>
+		<fieldset id="step2">
+			<h2 class="fs-title">Algemene informatie</h2>
+			<h3 class="fs-subtitle">Vul zorgvuldig deze informatie in</h3>
+			
+			<div class="error"></div>
+
+			<label for="recepe-name">Recept naam: <span class="required">*</span></label>
+			<input type="text" id="recepe-name" placeholder="Recept naam" name="name" class="input text"><br>
+
+			<label for="amount">Aantal personen: <span class="required">*</span></label>
+			<input type="text" value="1" id="amount" placeholder="Aantal personen" name="amount" class="input text"> Personen<br>
+
+			<label for="time">Bereidingstijd: <span class="required">*</span></label>
+			<input type="text" value="" id="time" placeholder="Bereidingstijd" name="time" class="input text"> Minuten<br>
+
+			<label for="menu">Menugang: <span class="required">*</span></label>
+			<select name="menu" id="menu">
+				<option value=""></option>
+				{% for gang in menugang %}
+					<option value="{{ gang.id }}">{{ gang.name }}</option>
+				{% endfor %}
+			</select><br class="clearfix">
+
+			<label for="group">Hoofdgroep: <span class="required">*</span></label>
+			<select name="group" id="group">
+				<option value=""></option>
+				{% for group in hoofdgroup %}
+					<option value="{{ group.id }}">{{ group.name }}</option>
+				{% endfor %}
+			</select><br class="clearfix">
+
+			<label for="technique">Bereidingstechniek: <span class="required">*</span></label>
+			<select name="technique" id="technique">
+				<option value=""></option>
+				{% for tech in technique %}
+					<option value="{{ tech.id }}">{{ tech.name }}</option>
+				{% endfor %}
+			</select><br>
+
+			<label for="kitchen">Keuken: <span class="required">*</span></label>
+			<select name="kitchen" id="kitchen">
+				<option value=""></option>
+				{% for kitch in kitchen %}
+					<option value="{{ kitch.id }}">{{ kitch.name }}</option>
+				{% endfor %}
+			</select><br>
+
+			<label for="opening">Gelegenheid: </label>
+			<select name="opening" id="opening">
+				<option value=""></option>
+				{% for open in opening %}
+					<option value="{{ open.id }}">{{ open.name }}</option>
+				{% endfor %}
+			</select><br>
+
+			<label for="opening">Speciale diëten:</label>
+			{% for diet in dieten %}
+				<input type="checkbox" value="{{ diet.id }}">{{ diet.name }} &nbsp; &nbsp;
+			{% endfor %}<br>
+			<br>
+			<input type="button" name="previous" class="previous button pull-left" value="Vorige" />
+			<input type="button" name="next" class="next button pull-left mar-l-10" value="Volgende" />
+		</fieldset>
+		<fieldset id="step3">
+			<h2 class="fs-title">Omschrijving</h2>
+			<h3 class="fs-subtitle">Bereidingswijze en ingrediënten</h3>
+			
+			<div class="error"></div>
+
+			<label for="ingredients">Ingrediënten: <span class="required">*</span></label>
+			<input type="text" id="ingredients" placeholder="Ingredient toevoegen" name="ingredients" class="input text tags"><br>
+
+			<label for="helpers">Hulpmiddelen:</label>
+			<input type="text" id="helpers" placeholder="Hulpmiddel toevoegen" name="helpers" class="input text tags"><br><br>
+
+			<label for="preparation">Bereidingswijze: <span class="required">*</span></label>
+			<textarea name="preparation" placeholder="Bereidingswijze" id="preparation" style="height:400px"></textarea><br>
+
+			<br>
+			<input type="button" name="previous" class="previous button pull-left" value="Vorige" />
+			<input type="button" name="next" class="next button pull-left mar-l-10" value="Volgende" />
+		</fieldset>
+		<fieldset id="step4">
+			<h2 class="fs-title">Omschrijving</h2>
+			<h3 class="fs-subtitle">Bereidingswijze en ingrediënten</h3>
+			
+			<div class="error"></div>
+
+			<label for="sourcename">Bron naam: </label>
+			<input type="text" id="sourcename" placeholder="Bron naam" name="sourcename" class="input text"><br>
+
+			<label for="sourceurl">Bron link: </label>
+			<input type="text" id="sourceurl" placeholder="Bron link" name="sourceurl" class="input text"><br>
+
+			<label for="tags">Sleutelwoorden: </label>
+			<input type="text" id="tags" placeholder="Sleutelwoorden" name="tags" class="input text tags"><br>
+
+			<br>
+			<input type="button" name="previous" class="previous button pull-left" value="Vorige" />
+			<input type="button" name="next" class="next button pull-left mar-l-10" value="Volgende" />
+		</fieldset>
+		<fieldset>
+			<h2 class="fs-title">Publiceren</h2>
+			<h3 class="fs-subtitle">Uw recept is toegevoegd. Wilt u deze in uw boek publiceren?</h3>
+			
+			<input type="submit" name="submit" class="submit button pull-left" value="Publiceren" />
+			<input type="submit" name="submit" class="submit button pull-left mar-l-10" value="Bekijken" />
+		</fieldset>
+	</form>	
+</div>
+
+<!-- jQuery easing plugin -->
+<script src="{{ base_url }}public/js/libs/jquery.tagsinput.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var animating = false;
+$(document).ready(function(){
+	$('.tags').tagsInput({
+		width: 480,
+		defaultText:'Toevoegen',
+		interactive:true
+	});
+	 
+	var current_fs, next_fs, previous_fs; //fieldsets
+	var left, opacity, scale; //fieldset properties which we will animate
+	var animating; //flag to prevent quick multi-click glitches
+
+	var stap2error = stap3error = 'Vul alle verplichten velden in<br>';
+	var stap2 = stap3 = false;
+
+	$(".next").click(function(){
+		check($(this));
+	});
+	$(".previous").click(function(){
+		previousfieldset($(this));
+	});
+
+	function check(button){
+		field = button.parent();
+		if(field.attr('id') == 'step1')
+		{
+			nextfieldset(button);
+		} else if(field.attr('id') == 'step2') {
+			if(stap2){
+				nextfieldset(button);
+			} else {
+				$("#step2 .error").html(stap2error);
+			}
+		} else if(field.attr('id') == 'step3') {
+			if(stap3){
+				nextfieldset(button);
+			} else {
+				$("#step3 .error").html(stap3error);
+			}
+		} else if(field.attr('id') == 'step4') {
+			var fields = $("#msform").serialize()+'&recept_token='+Recepten.token;
+			$.ajax({
+				url 	: Recepten.base_url+"ajax/recipes/add",
+				type	: 'POST',
+				data 	: fields,
+				success: function(response){
+					jQuery.parseJSON(response);
+					if(response.status == 'success'){
+						nextfieldset(button);
+					} else {
+						alert('niet alle velden zijn correct ingevuld!');
+					} 
+				},
+				error 	: function(error, msg){
+					alert('Er ging iets fout. Probeer later nog eensP');
+					console.info(error.responseText);
+				}
+			});
+		}
+	}
+
+	$("#step2 input, #step2 select").bind('blur keyup change', function (){
+		stap2error = '';
+		if( $("#recepe-name").val() == ''){
+			stap2error += 'Vul een recepten naam in <br>';
+		}
+		if( $("#amount").val() < 1 ){
+			stap2error += 'Vul de hoeveelheid personen in<br>';
+		}
+		if( $("#time").val() < 1 ){
+			stap2error += 'Vul een bereidingstijd in<br>';
+		}
+		if( $("#menu").val() == ''){
+			stap2error += 'Kies een menugang<br>';
+		}
+		if( $("#group").val() == ''){
+			stap2error += 'Kies een hoofdgroep<br>';
+		}
+		if( $("#technique").val() == ''){
+			stap2error += 'Kies een bereidingstechniek<br>';
+		}
+		if( $("#kitchen").val() == ''){
+			stap2error += 'Kies een keuken<br>';
+		}
+		if (stap2error == '') {
+			stap2 = true;
+			$("#step2 .error").html("");
+			$(".error").css('display', 'none');
+		} else {
+			stap2 = false;
+		}	
+	});
+	$("#step3 input, #step3 select").bind('blur keyup change', function (){
+		stap3error = '';
+		if( $("#ingredients").val() == ''){
+			stap3error += 'Vul de ingrediënten in <br>';
+		}
+		if( $("#preparation").val() == '' ){
+			stap3error += 'Vul de bereidingswijze in<br>';
+		}
+		if (stap3error == '') {
+			stap3 = true;
+			$("#step3 .error").html("");
+			$(".error").css('display', 'none');
+		} else {
+			stap3 = false;
+		}	
+	});
+
+});
+
+</script>
+{% endblock %}
+
